@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prevent scrollbar layout shifts */
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+@layer base {
+  :root {
+    --primary: #4f46e5;
+    --secondary: #6366f1;
+    --accent: #818cf8;
+    --gradient-start: #312e81;
+    --gradient-end: #4338ca;
+  }
+
+  body {
+    @apply min-h-screen text-gray-900 antialiased;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-indigo-600 text-white rounded-lg 
+    shadow-[0_4px_14px_0_rgba(79,70,229,0.39)] backdrop-blur-sm
+    hover:bg-indigo-700 hover:shadow-[0_6px_20px_rgba(79,70,229,0.45)]
+    transition-all duration-300 transform hover:scale-105 active:scale-95
+    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+    disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply bg-white/90 backdrop-blur-md rounded-xl 
+    shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-6
+    transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)]
+    transform hover:-translate-y-1 hover:bg-white/95;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-300 bg-white/80
+    backdrop-blur-sm focus:bg-white/95
+    focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+    transition-all duration-300 placeholder-gray-400;
+  }
+
+  .glass-effect {
+    @apply bg-white/30 backdrop-blur-md border border-white/20 
+    shadow-[0_8px_32px_0_rgba(31,38,135,0.37)];
+  }
+}
+
+/* Gradient Animation */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Enhanced Fade animations */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-in, transform 300ms ease-out;
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms ease-out, transform 300ms ease-in;
+}
+
+/* Enhanced Slide animations */
+.slide-up {
+  animation: enhancedSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes enhancedSlideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Enhanced Page transitions */
+.page-enter {
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 300ms ease-out, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.page-exit {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.page-exit-active {
+  opacity: 0;
+  transform: scale(0.95) translateY(-10px);
+  transition: opacity 300ms ease-in, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Loading spinner animation */
+.loading-spinner {
+  @apply w-10 h-10 border-4 border-indigo-200 rounded-full;
+  border-top-color: var(--primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
